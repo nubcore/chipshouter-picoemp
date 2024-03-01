@@ -2,7 +2,7 @@
 # Copyright (C) Colin O'Flynn, 2021
 # CC-SA 3.0 License
 
-from machine import Pin, PWM, Signal
+from machine import Pin, PWM, Signal, mem32
 import utime
 
 def pwm_off():
@@ -48,7 +48,7 @@ pulseOut = Pin(pulse_out_pin, Pin.OUT)
 # slew rate & drive. This wasn't enough so MOSFET was added to design,
 # but the high slew & drive is left set. Potentially we could modulate
 # the drive signal slightly by adjusting drive strength?
-machine.mem32[0x4 + 0x04*pulse_out_pin + 0x4001c000] = 0b1110011
+mem32[0x4 + 0x04*pulse_out_pin + 0x4001c000] = 0b1110011
 pulseOut.low()
 
 enabled = False
